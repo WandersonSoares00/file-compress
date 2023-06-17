@@ -1,5 +1,5 @@
-#ifndef Heap_H
-#define Heap_H
+#ifndef Heap_HPP
+#define Heap_HPP
 
 #include <iostream>
 
@@ -26,11 +26,13 @@ public:
     ~MinHeap(){
         delete[] h;
     }
-
-    void setElement(int i, const T &value){
-        h[i] = value;
+    /*
+    void setElement(const T &value){
+        ++m;
+        h[m] = value;
     }
-
+    */
+    
     void insertElement(const T &value){
         if (m + 1 < size){
             ++m;

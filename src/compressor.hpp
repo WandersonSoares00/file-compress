@@ -1,34 +1,43 @@
-#ifndef COMPRESSOR_H
-#define COMPRESSOR_H
-#include <iostream>
+#ifndef COMPRESSOR_HPP
+#define COMPRESSOR_HPP
 #include <fstream>
+#include <string>
+//#include <unordered_map>
+
 #include "heap.hpp"
+#include "Compactor.hpp"
 
-class Compressor{
-    struct NodeHuf  {   short int left, right;  };  //2 bytes
-
+class Compressor : public Compactor {       // Deixar privado
     struct NodeHeap{
         short int index;
         int weight;
-    
+        
+        NodeHeap(){}
+        NodeHeap(short int index, int weight){
+            this -> index = index;
+            this -> weight = weight;
+        }
+
         bool operator < ( NodeHeap &node) {
             return weight < node.weight;
         }
     };
 
-    int occur[256];
-    int num_char;
-    long int num_bytes;
-    NodeHuf *tree;
     MinHeap <NodeHeap> *heap;
-public:
+    int occur[256];
+    std::string in_file;
+    std::unordered_map<unsigned char, std::string> codes;
 
+public:
     Compressor();
-    ~Compressor();
+    //~Compressor();
     void read_file(std::string in_file);
-    void Huffman();
     void run();
-    void store(std::string out_file);
+    void store(std::string out_file) override;
+    void build_codes(int index, std::string code, int h = 0);
+private:
+    void Huffman();
+    //void build_codes(int index, short int code = 0, int h = 0) override;
 };
 
 #endif

@@ -1,19 +1,18 @@
 #ifndef DECOMPRESSOR_H
 #define DECOMPRESSOR_H
+
 #include <unordered_map>
 #include <iostream>
+#include "Compactor.hpp"
 
-class Decompressor{
-    std::unordered_map <char, unsigned char> map_bytes;
-
+class Decompressor : private Compactor{
 public:
     Decompressor();
-    ~Decompressor();
+    //~Decompressor();
     
-    void run();
-    void decod(std::string out_file);
-private:
-    void getCodes();
+    //void run();
+    void decod(std::string in_file, std::string out_file);
+    void store(std::string out_file) override;
 };
 
 
