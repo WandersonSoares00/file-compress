@@ -2,7 +2,7 @@
 #define COMPRESSOR_HPP
 #include <fstream>
 #include <string>
-//#include <unordered_map>
+#include <unordered_map>
 
 #include "heap.hpp"
 #include "Compactor.hpp"

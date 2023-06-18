@@ -1,4 +1,4 @@
-#include "decompressor.hpp"
+#include "inc/decompressor.hpp"
 #include <fstream>
 
 Decompressor :: Decompressor(){}

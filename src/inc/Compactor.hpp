@@ -2,8 +2,6 @@
 #define COMPACTOR_HPP
 
 #include "string"
-#include <unordered_map>
-//#include <cstring>
 
 #include <bitset>
 
@@ -24,8 +22,7 @@ public:
     
     //void build_codes(int index, int *code = 0, int h = 0);
     virtual void store(std::string out_file) = 0;
-    void printHuf(int i, int space = 0);
-    void printHuf();
+    void printHuf(int i, int space);
 };
 
 

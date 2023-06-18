@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-#include "Compactor.hpp"
-#include "compressor.hpp"
-#include "decompressor.hpp"
+#include "inc/Compactor.hpp"
+#include "inc/compressor.hpp"
+#include "inc/decompressor.hpp"
 
 using namespace std;
 
