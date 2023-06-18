@@ -7,7 +7,7 @@
 #include "heap.hpp"
 #include "Compactor.hpp"
 
-class Compressor : public Compactor {       // Deixar privado
+class Compressor : private Compactor {       // Deixar privado
     struct NodeHeap{
         short int index;
         int weight;
@@ -30,14 +30,11 @@ class Compressor : public Compactor {       // Deixar privado
 
 public:
     Compressor();
-    //~Compressor();
-    void read_file(std::string in_file);
-    void run();
-    void store(std::string out_file) override;
-    void build_codes(int index, std::string code, int h = 0);
+    void run(std::string in_file, std::string out_file) override;
 private:
+    void read_file(std::ifstream& file) override;
+    void build_codes(int index, std::string code, int h = 0);
     void Huffman();
-    //void build_codes(int index, short int code = 0, int h = 0) override;
 };
 
 #endif
