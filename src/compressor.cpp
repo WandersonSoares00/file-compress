@@ -12,13 +12,8 @@ Compressor :: Compressor(){
 
 //Compressor :: ~Compressor() {}
 
-void Compressor:: read_file(std::string file_name){
-    in_file.assign(file_name);
-    std::ifstream file(in_file.data(), std::ios_base::binary);
-
-    if(!file){
-        throw std::ifstream::failure("Erro ao abrir arquivo.");
-    }
+void Compressor:: read_file(std::ifstream& file){
+    //in_file.assign(file_name);
 
     unsigned char byte;
     
@@ -35,7 +30,24 @@ void Compressor:: read_file(std::string file_name){
         if (*i != 0)
             ++num_char;
 
+
     tree = new NodeHuf[2*num_char - 1];
+
+    NodeHeap *temp = new NodeHeap[num_char];
+
+    for (short int i = 0, j = 0; i < 256; ++i){
+        if (occur[i] != 0){
+            tree[j].left = i;
+            NodeHeap node(j, occur[i]);
+            temp[j] = node;
+            ++j;
+        }
+    }
+
+    heap = new MinHeap(temp, num_char);
+    delete[] temp;
+
+    this -> Huffman();
 }
 
 void Compressor :: Huffman(){
@@ -50,28 +62,6 @@ void Compressor :: Huffman(){
         (*heap).insertElement(node);
         ++ind;
     }
-}
-
-void Compressor :: run(){
-    NodeHeap *temp = new NodeHeap[num_char];
-
-    for (short int i = 0, j = 0; i < 256; ++i){
-        if (occur[i] != 0){
-            tree[j].left = i;
-            NodeHeap node(j, occur[i]);
-            temp[j] = node;
-            ++j;
-        }
-    }
-
-    heap = new MinHeap(temp, num_char);
-    delete[] temp;
-    //for (int i = (*heap).number_elements() / 2 - 1; i >= 0; ++i )
-    //    (*heap).heapify(i);
-
-    Huffman();
-
-
 }
 
 void Compressor :: build_codes(int index, std::string code, int h) {
@@ -89,15 +79,22 @@ void Compressor :: build_codes(int index, std::string code, int h) {
     }
 }
 
-void Compressor :: store(std::string out_file){
+void Compressor :: run(std::string in_file, std::string out_file){
     std::ofstream file_out(out_file.data(), std::ios_base::binary);
     std::ifstream file_in  (in_file.data(), std::ios_base::binary);
-    
+
     unsigned char byte;
 
-    if(!file_out or !file_in){
+    if(!file_out or !file_in)
         throw std::ifstream::failure("Erro ao processar arquivo.");
-    }
+
+    this -> read_file(file_in);
+    
+    file_in.close();
+    file_in.open(in_file.data(), std::ios_base::binary);
+    if(!file_out or !file_in)
+        throw std::ifstream::failure("Erro ao processar arquivo.");
+    
 
     // raiz na última posição
     std::string code(256, '0');
