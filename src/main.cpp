@@ -38,7 +38,7 @@ int main(int argc, char **argv){
     
     string input_file(argv[2]);
     string out_file("out.dah");
-    if (argc >= 5)
+    if (argc >= 4)
         out_file.assign(argv[3]);
 
     try{
