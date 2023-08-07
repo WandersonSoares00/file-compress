@@ -35,7 +35,7 @@ On debian-based linux distributions, run `sudo apt install g++ make`
     `cd file-compress`
 3. Compile:
     `make all`
-4. run in mode compressor or decompress
+4. run in mode compressor or decompress <br>
     The program can be executed using the following format: <br>
     *./comp [mode] FILE NAME_FILE_OUT* <br>
     where [mode] can be -c (for compressor) or -d (for decompressor).
