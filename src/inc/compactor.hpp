@@ -3,13 +3,6 @@
 
 #include "string"
 #include <fstream>
-#include <bitset>
-
-template<typename T>
-void printBinary(T number) {
-    std::bitset<sizeof(T) * 8> binary(number);
-    std::cout << binary << std::endl;
-}
 
 class Compactor{
 public:

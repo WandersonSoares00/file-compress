@@ -2,9 +2,10 @@
 #define DECOMPRESSOR_H
 
 #include <iostream>
-#include "Compactor.hpp"
+#include "compactor.hpp"
 
 class Decompressor : private Compactor{
+    unsigned char single_char;
 public:
 
     Decompressor();

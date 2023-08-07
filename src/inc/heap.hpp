@@ -24,14 +24,9 @@ public:
     }
     
     ~MinHeap(){
-        delete[] h;
+        if (size>0)
+            delete[] h;
     }
-    /*
-    void setElement(const T &value){
-        ++m;
-        h[m] = value;
-    }
-    */
     
     void insertElement(const T &value){
         if (m + 1 < size){
@@ -80,19 +75,7 @@ public:
         }
     }
 
-    /*
-    void printHeap(int index = 0, int level = 0){
-        if( index <= m ) { 
-            printHeap(2*index + 1, level + 1);
-            
-            for(int i = 0; i < level; i++)  
-                std::cout << "     ";
-            std::cout << h[index] << '\n';
-            
-            printHeap(2*index + 2, level + 1);
-        }
-    }
-    */
+
 };
 
 

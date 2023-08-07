@@ -5,7 +5,7 @@
 #include <unordered_map>
 
 #include "heap.hpp"
-#include "Compactor.hpp"
+#include "compactor.hpp"
 
 class Compressor : private Compactor {       // Deixar privado
     struct NodeHeap{

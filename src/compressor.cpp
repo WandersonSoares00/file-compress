@@ -13,7 +13,6 @@ Compressor :: Compressor(){
 //Compressor :: ~Compressor() {}
 
 void Compressor:: read_file(std::ifstream& file){
-    //in_file.assign(file_name);
 
     unsigned char byte;
     
@@ -30,6 +29,8 @@ void Compressor:: read_file(std::ifstream& file){
         if (*i != 0)
             ++num_char;
 
+    if (num_char < 2)
+        return;
 
     tree = new NodeHuf[2*num_char - 1];
 
@@ -86,51 +87,32 @@ void Compressor :: run(std::string in_file, std::string out_file){
     unsigned char byte;
 
     if(!file_out or !file_in)
-        throw std::ifstream::failure("Erro ao processar arquivo.");
+        throw std::ifstream::failure("Erro ao processar arquivo");
 
     this -> read_file(file_in);
     
     file_in.close();
     file_in.open(in_file.data(), std::ios_base::binary);
-    if(!file_out or !file_in)
-        throw std::ifstream::failure("Erro ao processar arquivo.");
-    
-
-    // raiz na última posição
-    std::string code(256, '0');
-    build_codes(2 * num_char - 2, code);
-    
-    /*
-    for (const auto& pair : codes) 
-        if (pair.first == '\n')
-            std::cout << "Chave: \\n, Valor: " << pair.second.substr(0, 5) << std::endl;
-        else
-            std::cout << "Chave: " << pair.first << ", Valor: " << pair.second.substr(0, 5) << std::endl;
-    */
+    if(!file_in)
+        throw std::ifstream::failure("Erro ao abrir arquivo");
 
     if (num_char == 0)
         return;
     if (num_char == 1){
-        file_out << num_char;
+        file_out.write((char*) &num_char, sizeof(num_char));
         byte = file_in.get();
-        file_out << byte;
-        file_out << occur[byte];
+        file_out.write((char*) &byte, sizeof(byte));
+        file_out.write((char*) &occur[byte], sizeof(long int));
         return;
     }
 
+    std::string code(256, '0');
+    build_codes(2 * num_char - 2, code);    // raiz na última posição
 
     file_out.write((char*) &num_char, sizeof(num_char));
     file_out.write((char *) tree, ((2*num_char) - 1) * sizeof(NodeHuf));
     file_out.write((char*) &num_bytes, sizeof(num_bytes));
     
-    /*
-    std::ostringstream oss;
-    oss << "cat " << out_file;
-    std::string command = oss.str();
-    system(command.c_str());
-    */
-    
-    //std::cout << "\n\n";
     unsigned char buff = 0;
     std::string code_byte;
     int bits = 0;

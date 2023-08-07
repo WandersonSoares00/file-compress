@@ -1,13 +1,13 @@
 # file-compress
 
-this project is a file archiver made with the implementation of [Huffman's algorithm](https://en.wikipedia.org/wiki/Huffman_coding).
+This project is a file archiver made with the implementation of [Huffman's algorithm](https://en.wikipedia.org/wiki/Huffman_coding).
 
 ## Purpose
 
 The intention of this project is understand how file archivers works.
 
 ## Results
-The directory [instancias_teste](instancias_teste) contains files for testing. Follows the size of the files in bytes before and after compressing them: <br>
+The directory [instancias_teste](instancias_teste) contains files for testing.elow are the sizes of the files in bytes before and after compressing them: <br>
 
 | Files   | Before | After  |
 |---------|--------|--------|
