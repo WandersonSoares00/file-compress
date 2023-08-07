@@ -7,7 +7,7 @@ This project is a file archiver made with the implementation of [Huffman's algor
 The intention of this project is understand how file archivers works.
 
 ## Results
-The directory [instancias_teste](instancias_teste) contains files for testing.elow are the sizes of the files in bytes before and after compressing them: <br>
+The directory [instancias_teste](instancias_teste) contains files for testing. Below are the sizes of the files in bytes before and after compressing them: <br>
 
 | Files   | Before | After  |
 |---------|--------|--------|
